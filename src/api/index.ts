@@ -3,11 +3,20 @@ import * as Koa from 'koa';
 
 import UserService from './../services/User';
 import { User } from './../types/User';
+import { eventEmitter } from './../subscribers/emitter';
 
 const router: Router = new Router();
 
-router.get('/*', async (ctx: Koa.Context) => {
-    ctx.body = { neat: 'Hello World!' };
+router.get('/', async (ctx: Koa.Context) => {
+    ctx.body = { data: 'Hello World!' };
+});
+
+router.get('/event/:eventName', async (ctx: Koa.Context) => {
+    const event = ctx.params.eventName || 'register';
+    eventEmitter.emit(event, {
+        user: { name: 'Tony', params: ctx.params },
+    });
+    ctx.body = { data: `Emitting Event: ${event}` };
 });
 
 router.post(

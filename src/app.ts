@@ -1,24 +1,20 @@
 import * as Koa from 'koa';
+import * as bodyParser from 'koa-bodyparser';
 import { router } from './api';
+import { errorMiddleware } from './middleware/errors';
+import { responseTime } from './middleware/responseTime';
+
 const app: Koa = new Koa();
 
-const PORT: number = Number(process.env.PORT) || 3010;
-
-app.use(async (ctx, next) => {
-    const start = Date.now();
-    await next();
-    const ms = Date.now() - start;
-    ctx.set('X-Response-Time', `${ms}ms`);
-    console.log(`time is: ${ms}`);
-});
-
-app.use(async (ctx, next) => {
-    ctx.body = 'Middleware running';
-    await next();
-});
+app.use(bodyParser());
+app.use(responseTime);
+app.use(errorMiddleware);
 
 app.use(router.routes());
+// this will ensure correct responses are given for disallowed or non-implemented methods
+app.use(router.allowedMethods());
 
-app.listen(PORT, () => {
-    console.log(`listening on PORT: ${PORT}`);
-});
+// Application error logging.
+app.on('error', console.error);
+
+export default app;
