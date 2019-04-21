@@ -4,12 +4,15 @@
     "description": "Startup Node app with Koa, Typescript, Docker, Jest, and ESLint",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node ./src/server.ts",
+        "dev:docker": "concurrently -k -n 'TypeScript,Node' -p '[{name}]' 'tsc -w' 'nodemon --delay 500ms --inspect=0.0.0.0:9229 ./dist/app.js'"
     },
     "keywords": [],
     "author": "Tony Rudny",
     "license": "ISC",
     "dependencies": {
+        "concurrently": "^4.1.0",
         "jest": "^24.1.0",
         "koa": "^2.7.0",
         "koa-router": "^7.4.0"
