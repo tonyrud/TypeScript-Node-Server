@@ -1,10 +1,8 @@
 import * as Koa from 'koa';
-import * as Router from 'koa-router';
+import { router } from './api';
+const app: Koa = new Koa();
 
-const app = new Koa();
-const router = new Router();
-
-const port = process.env.PORT || 3010;
+const PORT: number = Number(process.env.PORT) || 3010;
 
 app.use(async (ctx, next) => {
     const start = Date.now();
@@ -19,12 +17,8 @@ app.use(async (ctx, next) => {
     await next();
 });
 
-router.get('/*', async ctx => {
-    ctx.body = 'Hello World!';
-});
-
 app.use(router.routes());
 
-app.listen(port, () => {
-    console.log(`listening on port: ${port}`);
+app.listen(PORT, () => {
+    console.log(`listening on PORT: ${PORT}`);
 });

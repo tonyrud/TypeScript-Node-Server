@@ -1,10 +1,13 @@
 {
     "compilerOptions": {
+        "target": "ES2017",
         "module": "commonjs",
-        "target": "es2017",
+        "lib": ["es2017"],
+        "outDir": "dist",
+        "rootDir": "src",
         "noImplicitAny": true,
-        "outDir": "./dist",
-        "sourceMap": true
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
     },
     "include": ["./src/**/*"]
 }
