@@ -1,7 +1,18 @@
 import app from './app';
+import config from './config';
 
-const PORT: number = Number(process.env.PORT) || 3010;
+async function startServer() {
+    // await require('./loaders').default({ expressApp: app });
 
-app.listen(PORT, () => {
-    console.log(`listening on PORT: ${PORT}`);
-});
+    app.listen(config.port, () => {
+        // TODO get error handling on server start
+        // if (err) {
+        //     console.log(err);
+        //     process.exit(1);
+        //     return '';
+        // }
+        console.log('Server listening on port:', config.port);
+    });
+}
+
+startServer();

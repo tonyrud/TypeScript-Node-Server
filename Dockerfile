@@ -2,7 +2,7 @@ FROM node:11
 
 # RUN groupadd -g 999 appuser && \
 #     useradd -r -u 999 -g appuser appuser
-RUN useradd --user-group --create-home --shell /bin/false app
+# RUN useradd --user-group --create-home --shell /bin/false app
 
 ENV HOME=/app/
 
@@ -12,9 +12,9 @@ ADD package.json package-lock.json /tmp/
 RUN cd /tmp && npm install
 RUN cp -a /tmp/node_modules $HOME
 
-RUN chown -R app:app $HOME
+# RUN chown -R app:app $HOME
 
-USER app
+# USER app
 
 WORKDIR $HOME
 ADD . $HOME
