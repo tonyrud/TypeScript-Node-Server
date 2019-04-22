@@ -10,6 +10,7 @@ if (!envSetup) {
 
 export default {
     port: Number(process.env.PORT),
+    isProduction: Boolean(process.env.NODE_ENV === 'production'),
     postgres: {
         url: process.env.DATABASE_URI,
         secretKey: process.env.PAYPAL_SECRET_KEY,

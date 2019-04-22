@@ -1,6 +1,16 @@
 ## Node Server 
 
-Typescript, Docker, tslint, event emitter, postgres, typeorm
+Typescript, Docker, tslint, pub/sub event emitters, Postgres, TypeORM, cluster module in production
+
+## Run with docker
+
+`docker-compose up --build`
+
+## Run locally
+
+`npm run dev`
+
+
 
 ## Directory Structure
 
@@ -14,3 +24,8 @@ src/
 * services        - All the business logic is here
 * subscribers     - Event handlers for async task
 * types           - Type declaration files (d.ts) for Typescript
+
+## TODO
+* CI
+* Jest
+* modularize app init

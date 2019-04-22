@@ -1,6 +1,6 @@
 import app from './app';
 import * as Koa from 'koa';
-
+import config from './config';
 export class Server {
     private port: number;
     private app: Koa = app;
@@ -11,8 +11,13 @@ export class Server {
 
     public start() {
         this.app.listen(this.port, () => {
+            const serverEnv = config.isProduction
+                ? 'Production'
+                : 'Development';
             console.log(
-                `Server process: ${process.pid} listen on port ${this.port}`
+                `${serverEnv} Server: process id: ${process.pid} port ${
+                    this.port
+                }`
             );
         });
 
