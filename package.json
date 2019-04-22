@@ -19,7 +19,8 @@
         "jest": "^24.1.0",
         "koa": "^2.7.0",
         "koa-bodyparser": "^4.2.1",
-        "koa-router": "^7.4.0"
+        "koa-router": "^7.4.0",
+        "morgan": "^1.9.1"
     },
     "devDependencies": {
         "@types/http-status-codes": "^1.2.0",
