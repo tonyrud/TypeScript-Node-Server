@@ -4,11 +4,9 @@
     "description": "Startup Node app with Koa, Typescript, Docker, Jest, and ESLint",
     "main": "index.js",
     "scripts": {
-        "serve": "ts-node src/server.ts",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node ./src/server.ts",
-        "dev:docker-inspect": "concurrently -k -n 'TypeScript,Node' -p '[{name}]' 'tsc -w' 'nodemon --delay 500ms --inspect=0.0.0.0:9229 ./dist/app.js'",
-        "dev:docker": "nodemon"
+        "serve": "ts-node src/index.ts",
+        "dev": "nodemon",
+        "dev:docker-inspect": "concurrently -k -n 'TypeScript,Node' -p '[{name}]' 'tsc -w' 'nodemon --delay 500ms --inspect=0.0.0.0:9229 ./dist/app.js'"
     },
     "keywords": [],
     "author": "Tony Rudny",

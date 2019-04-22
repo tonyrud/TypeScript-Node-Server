@@ -9,7 +9,7 @@ if (!envSetup) {
 }
 
 export default {
-    port: process.env.PORT,
+    port: Number(process.env.PORT),
     postgres: {
         url: process.env.DATABASE_URI,
         secretKey: process.env.PAYPAL_SECRET_KEY,
