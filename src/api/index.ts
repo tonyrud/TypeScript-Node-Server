@@ -1,38 +1,9 @@
-import * as Router from 'koa-router';
-import * as Koa from 'koa';
+import app from './../app';
 
-import UserService from './../services/User';
-import { User } from './../types/User';
-import { eventEmitter } from './../subscribers/emitter';
+import movieController from './movies.controller';
+import healthCheck from './healthcheck';
 
-const router: Router = new Router();
-
-router.get('/', async (ctx: Koa.Context) => {
-    ctx.body = { data: 'Hello World!' };
-});
-
-router.get('/event/:eventName', async (ctx: Koa.Context) => {
-    const event = ctx.params.eventName || 'register';
-    eventEmitter.emit(event, {
-        user: { name: 'Tony', params: ctx.params },
-    });
-    ctx.body = { data: `Emitting Event: ${event}` };
-});
-
-router.post(
-    '/',
-    // validators.userSignup, // this middleware take care of validation
-    async (ctx: Koa.Context, next) => {
-        // The actual responsability of the route layer.
-        const userDTO: User = { name: 'Tony', _id: 'asdf' };
-
-        // Call to service layer.
-        // Abstraction on how to access the data layer and the business logic.
-        const { user, company } = await UserService.Signup(userDTO);
-
-        // Return a response to client.
-        return ctx.json({ user, company });
-    }
-);
-
-export { router };
+app.use(healthCheck.routes());
+app.use(movieController.routes());
+// this will ensure correct responses are given for disallowed or non-implemented methods
+app.use(movieController.allowedMethods());

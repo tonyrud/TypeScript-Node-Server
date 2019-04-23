@@ -1,6 +1,9 @@
 import app from './app';
 import * as Koa from 'koa';
 import config from './config';
+import databaseConnection from './connections/database.connection';
+
+import './api';
 export class Server {
     private port: number;
     private app: Koa = app;
@@ -9,7 +12,12 @@ export class Server {
         this.port = port;
     }
 
-    public start() {
+    public async start() {
+        try {
+            await databaseConnection;
+        } catch (error) {
+            this.app.emit('error', error);
+        }
         this.app.listen(this.port, () => {
             const serverEnv = config.isProduction
                 ? 'Production'

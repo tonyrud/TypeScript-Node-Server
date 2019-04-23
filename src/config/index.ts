@@ -1,3 +1,4 @@
+import { ConfigInterface } from './ConfigInterface';
 import * as dotenv from 'dotenv';
 const envSetup = dotenv.config();
 
@@ -8,12 +9,15 @@ if (!envSetup) {
     throw new Error("⚠️  Couldn't find .env file  ⚠️");
 }
 
-export default {
+const config: ConfigInterface = {
     port: Number(process.env.PORT),
     isProduction: Boolean(process.env.NODE_ENV === 'production'),
     postgres: {
-        url: process.env.DATABASE_URI,
-        secretKey: process.env.PAYPAL_SECRET_KEY,
+        host: process.env.DB_HOST,
+        port: Number(process.env.DB_PORT),
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        name: process.env.DB_NAME,
     },
     logs: {
         level: process.env.LOG_LEVEL,
@@ -25,3 +29,5 @@ export default {
         prefix: '/api',
     },
 };
+
+export default config;

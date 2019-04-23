@@ -2,6 +2,7 @@ version: '3'
 
 services:
     koa-app:
+        container_name: app_container
         build: .
         command: npm run dev
         volumes:
@@ -12,12 +13,51 @@ services:
         ports:
             - '3010:3010'
 
-    database:
-        image: postgres:11-alpine
-        restart: always
+    # database:
+    #     image: postgres:11-alpine
+    #     restart: always
+    #     expose:
+    #         - '5432'
+    #     ports:
+    #         - '5432:5432'
+    #     environment:
+    #         POSTGRES_DB: typescript-koa
+    postgres:
+        container_name: postgres_container
+        image: postgres
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER:-postgres}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+            PGDATA: /data/postgres
+            POSTGRES_DB: typescript-koa
+        volumes:
+            - postgres:/data/postgres
         expose:
             - '5432'
         ports:
-            - '5432:5432'
+            - "5432:5432"
+        networks:
+            - postgres
+        restart: unless-stopped
+  
+    pgadmin:
+        container_name: pgadmin_container
+        image: dpage/pgadmin4
         environment:
-            POSTGRES_DB: typescript-koa
+            PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+            PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+        volumes:
+            - pgadmin:/root/.pgadmin
+        ports:
+            - "${PGADMIN_PORT:-5050}:80"
+        networks:
+            - postgres
+        restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+    postgres:
+    pgadmin:
