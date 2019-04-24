@@ -3,7 +3,7 @@ import movieEntity from './../models/movie.entity';
 import { eventEmitter } from '../subscribers/emitter';
 
 export default class MovieService {
-    public static async getMovies() {
+    public static async getMovies(): Promise<{ movies: movieEntity[] }> {
         const movieRepo: Repository<movieEntity> = getRepository(movieEntity);
 
         const movies = await movieRepo.find();
@@ -13,5 +13,13 @@ export default class MovieService {
         });
 
         return { movies };
+    }
+
+    public static async getMovie(id: string): Promise<{ movie: movieEntity }> {
+        const movieRepo: Repository<movieEntity> = getRepository(movieEntity);
+
+        const movie = await movieRepo.findOne(id);
+
+        return { movie };
     }
 }

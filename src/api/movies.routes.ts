@@ -17,7 +17,11 @@ router.get('/', async (ctx: Koa.Context) => {
 });
 
 router.get('/:movie_id', async (ctx: Koa.Context) => {
-    ctx.body = 'GET SINGLE';
+    const data = await MovieService.getMovie(ctx.params.movie_id);
+
+    ctx.body = {
+        data,
+    };
 });
 
 router.post('/', async (ctx: Koa.Context) => {

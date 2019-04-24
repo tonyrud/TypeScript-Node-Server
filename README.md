@@ -33,4 +33,5 @@ View on `localhost:3010`
 * modularize app init
 * Make a class based router setup
 * Database seeding
-* add git commit template
+* logging layer with Winston
+* Auth layer
