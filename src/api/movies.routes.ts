@@ -1,5 +1,6 @@
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
+import MovieService from './../services/Movie';
 
 const routerOpts: Router.IRouterOptions = {
     prefix: '/movies',
@@ -8,7 +9,11 @@ const routerOpts: Router.IRouterOptions = {
 const router: Router = new Router(routerOpts);
 
 router.get('/', async (ctx: Koa.Context) => {
-    ctx.body = 'GET ALL';
+    const data = await MovieService.getMovies();
+
+    ctx.body = {
+        data,
+    };
 });
 
 router.get('/:movie_id', async (ctx: Koa.Context) => {

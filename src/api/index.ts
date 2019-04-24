@@ -1,9 +1,9 @@
 import app from './../app';
 
-import movieController from './movies.controller';
-import healthCheck from './healthcheck';
+import moviesRoutes from './movies.routes';
+import healthCheckRoutes from './healthcheck.routes';
 
-app.use(healthCheck.routes());
-app.use(movieController.routes());
+app.use(healthCheckRoutes.routes());
+app.use(moviesRoutes.routes());
 // this will ensure correct responses are given for disallowed or non-implemented methods
-app.use(movieController.allowedMethods());
+app.use(moviesRoutes.allowedMethods());

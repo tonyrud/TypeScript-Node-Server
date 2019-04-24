@@ -1,9 +1,9 @@
 const events = require('events');
 const eventEmitter = new events.EventEmitter();
 
-eventEmitter.on('register', (data: any) => {
+eventEmitter.on('email', (data: any) => {
     // do database, register, emailing stuff
-    console.log('running register:', data);
+    console.log('email event:', data);
 });
 
 export { eventEmitter };
