@@ -6,6 +6,8 @@
     "scripts": {
         "serve": "ts-node src/index.ts",
         "start": "NODE_ENV=production node dist/index.js",
+        "clean": "rm -rf dist",
+        "build": "npm run clean && tsc",
         "dev": "nodemon",
         "dev:docker-inspect": "concurrently -k -n 'TypeScript,Node' -p '[{name}]' 'tsc -w' 'nodemon --delay 500ms --inspect=0.0.0.0:9229 ./dist/app.js'"
     },

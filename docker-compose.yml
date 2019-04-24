@@ -3,7 +3,6 @@ version: '3'
 services:
     koa-app:
         container_name: app_container
-        # build: .
         image: node:11
         command: npm run dev
         volumes:
