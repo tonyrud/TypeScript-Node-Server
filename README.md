@@ -35,3 +35,4 @@ View on `localhost:3010`
 * Database seeding
 * logging layer with Winston
 * Auth layer
+* Redis cacheing

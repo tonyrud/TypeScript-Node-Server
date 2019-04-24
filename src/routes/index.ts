@@ -1,4 +1,4 @@
-import app from './../app';
+import app from '../app';
 
 import moviesRoutes from './movies.routes';
 import healthCheckRoutes from './healthcheck.routes';

@@ -1,6 +1,8 @@
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
-import MovieService from './../services/Movie';
+import * as HttpStatus from 'http-status-codes';
+
+import MovieService from '../services/MovieService';
 
 const routerOpts: Router.IRouterOptions = {
     prefix: '/movies',
@@ -17,7 +19,12 @@ router.get('/', async (ctx: Koa.Context) => {
 });
 
 router.get('/:movie_id', async (ctx: Koa.Context) => {
-    const data = await MovieService.getMovie(ctx.params.movie_id);
+    const data = await MovieService.getMovie(ctx, ctx.params.movie_id);
+
+    // This will be handled upstream by our custom error middleware.
+    if (!data) {
+        ctx.throw(HttpStatus.NOT_FOUND);
+    }
 
     ctx.body = {
         data,
