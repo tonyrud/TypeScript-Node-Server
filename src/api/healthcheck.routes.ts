@@ -7,4 +7,8 @@ router.get('/status', async (ctx: Koa.Context) => {
     ctx.status = 200;
 });
 
+router.get('/', async (ctx: Koa.Context) => {
+    ctx.body = 'Server running';
+});
+
 export default router;

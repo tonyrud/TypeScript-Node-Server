@@ -7,7 +7,7 @@ import config from '../config';
 const connectionOpts: ConnectionOptions = {
     type: 'postgres',
     host: config.postgres.host || 'host.docker.internal',
-    port: config.postgres.port || 5432,
+    port: config.postgres.port || 54322,
     username: config.postgres.username || 'postgres',
     password: config.postgres.password || 'changeme',
     database: config.postgres.name || 'postgres',

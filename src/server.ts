@@ -3,7 +3,7 @@ import * as Koa from 'koa';
 import config from './config';
 import databaseConnection from './connections/database.connection';
 
-import './routes';
+import './api';
 export class Server {
     private port: number;
     private app: Koa = app;
@@ -16,8 +16,6 @@ export class Server {
         try {
             await databaseConnection;
         } catch (error) {
-            console.log('errrrror in db connection');
-
             this.app.emit('error', error);
         }
         this.app.listen(this.port, () => {
