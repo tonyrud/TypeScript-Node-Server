@@ -22,7 +22,7 @@ Seed Docker database:
 
 `npm start`
 
-View on json data at [localhost:3010/movies](http://localhost:3010/movies)
+View json data at [localhost:3010/movies](http://localhost:3010/movies)
 
 ## Access to postgres
 
